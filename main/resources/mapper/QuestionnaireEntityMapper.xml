@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sisp.dao.QuestionnaireEntityMapper">
+  <resultMap id="QuestionnaireMap" type="com.sisp.dao.entity.QuestionnaireEntity">
+
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="survey_type" jdbcType="VARCHAR" property="surveyType" />
+    <result column="survey_name" jdbcType="VARCHAR" property="surveyName" />
+    <result column="survey_description" jdbcType="VARCHAR" property="surveyDescription" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="template_id" jdbcType="VARCHAR" property="templateId"/>
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="is_release" jdbcType="VARCHAR" property="isRelease"/>
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete"/>
+
+  </resultMap>
+
+  <insert id="insert" parameterType="com.sisp.dao.entity.QuestionnaireEntity" >
+
+    insert into questionnaire_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null ">
+        project_id,
+      </if>
+      <if test="surveyType != null">
+        survey_type,
+      </if>
+      <if test="surveyName != null">
+        survey_name,
+      </if>
+      <if test="surveyDescription != null">
+        survey_description,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="isRelease != null">
+        is_release,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null ">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyType != null">
+        #{surveyType,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyName != null">
+        #{surveyName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyDescription != null">
+        #{surveyDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRelease != null">
+        #{isRelease,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+
+
+
+  <select id="queryQuestionnaireList" resultMap="QuestionnaireMap" parameterType="com.sisp.dao.entity.QuestionnaireEntity" >
+    select *
+    from questionnaire_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+
+      <if test="projectId != null and projectId != ''">
+        and project_id = #{projectId}
+      </if>
+
+      <if test="isDelete != null and isDelete != ''">
+        and is_delete = #{isDelete}
+      </if>
+
+
+    </where>
+
+  </select>
+
+
+  <update id="updateQuestionnaire" parameterType="com.sisp.dao.entity.QuestionnaireEntity">
+    update questionnaire_info
+    <set>
+      <if test="projectId != null">project_id = #{projectId,jdbcType=VARCHAR},</if>
+      <if test="surveyType != null">survey_type = #{surveyType,jdbcType=VARCHAR},</if>
+      <if test="surveyName != null">survey_name = #{surveyName,jdbcType=VARCHAR},</if>
+      <if test="surveyDescription != null">survey_description = #{surveyDescription,jdbcType=VARCHAR},</if>
+      <if test="startTime != null">start_time = #{startTime,jdbcType=TIMESTAMP},</if>
+      <if test="endTime != null">end_time = #{endTime,jdbcType=TIMESTAMP},</if>
+      <if test="templateId != null">template_id = #{templateId,jdbcType=VARCHAR},</if>
+      <if test="releaseTime != null">release_time = #{releaseTime,jdbcType=TIMESTAMP},</if>
+      <if test="isRelease != null">is_release = #{isRelease,jdbcType=VARCHAR},</if>
+      <if test="isDelete != null ">is_delete = #{isDelete,jdbcType=VARCHAR},</if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteQuestionnaire" parameterType="com.sisp.dao.entity.QuestionnaireEntity">
+
+    delete from questionnaire_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+
+
+
+</mapper>
